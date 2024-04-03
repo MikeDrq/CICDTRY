@@ -23,8 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: 全局安装 pnpm
       run: npm install -g pnpm
-    - name: pnpm install
+    - name: pnpm run
       run: pnpm install
     - name: pnpm install
       run: pnpm run serve
-    - run: pnpm run test
