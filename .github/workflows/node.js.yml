@@ -7,17 +7,24 @@ on:
     branches: [ "main" ]
 
 jobs:
-  install:
+  build:
+
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 8
-          run_install: |
-            - recursive: true
-              args: [--frozen-lockfile, --strict-peer-dependencies]
-            - args: [--global, gulp, prettier, typescript]
-
+    - uses: actions/checkout@v3
+    - name: 使用 Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: 全局安装 pnpm
+      run: npm install -g pnpm
+    - name: pnpm install
+      run: pnpm install
+    - name: pnpm install
+      run: pnpm run serve
+    - run: pnpm run test
