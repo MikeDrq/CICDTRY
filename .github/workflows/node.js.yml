@@ -25,5 +25,3 @@ jobs:
       run: npm install -g pnpm
     - name: pnpm install
       run: pnpm install
-    - name: pnpm run
-      run: pnpm run serve
